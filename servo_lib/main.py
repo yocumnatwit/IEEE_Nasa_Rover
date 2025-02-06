@@ -16,7 +16,7 @@ class Servo_Lib:
         Rotate the servo to a specific position in degrees.
         step_delay: Time delay between each step of rotation default 0.03 seconds.
         """
-        if pos_deg > 180:
+        if pos_deg > 120:
             raise ValueError("Desired position greater than 180!")
         elif pos_deg < 0:
             raise ValueError("Desired position less than 0!")
