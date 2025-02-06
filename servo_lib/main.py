@@ -17,7 +17,7 @@ class Servo_Lib:
         step_delay: Time delay between each step of rotation default 0.03 seconds.
         """
         if pos_deg > 120:
-            raise ValueError("Desired position greater than 180!")
+            raise ValueError("Desired position greater than 120!")
         elif pos_deg < 0:
             raise ValueError("Desired position less than 0!")
 
