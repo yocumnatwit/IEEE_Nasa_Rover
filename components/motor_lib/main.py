@@ -54,3 +54,7 @@ class Motor_Lib:
         self.cleanup()
         del self
         
+class Drive_Lib:
+    def __init__():
+        pass
+    
