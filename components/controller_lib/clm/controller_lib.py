@@ -1,9 +1,8 @@
 from inputs import get_gamepad
 import math
 import threading
-import time 
 
-class XboxController(object):
+class Controller(object):
     MAX_TRIG_VAL = math.pow(2, 8)
     MAX_JOY_VAL = math.pow(2, 15)
 
@@ -35,11 +34,57 @@ class XboxController(object):
         self._monitor_thread.start()
 
 
-    def read(self): 
+    def readLetterButtons(self): 
         """
-        Currently Does nothing
+        Return A B X Y status
         """
-        pass
+        a = self.A
+        b = self.B
+        x = self.X
+        y = self.Y
+
+        return [a, b, x, y]
+
+    def readDPad(self):
+        """
+        Return Up Down Left Right DPadstatus
+        """
+        u = self.UpDPad
+        d = self.DownDPad
+        l = self.LeftDPad
+        r = self.RightDPad
+
+        return [u, d, l, r]
+
+    def readBumpers(self):
+        """
+        Read left and right bumpers
+        """
+
+        l = self.LeftBumper
+        r = self.RightBumper
+
+        return [l, r]
+
+    def readTriggers(self):
+        """
+        Read left and right triggers
+        """
+
+        l = self.LeftTrigger
+        r = self.RightTrigger
+
+        return [l, r]
+
+    def readTriggers(self):
+        """
+        Read left and right thumb buttons
+        """
+
+        l = self.LeftThumb
+        r = self.RightThumb
+
+        return [l, r]
  
     def __readSticksRaw(self):
         """
@@ -113,17 +158,17 @@ class XboxController(object):
             events = get_gamepad()
             for event in events:
                 if event.code == 'ABS_Y':
-                    self.LeftJoystickY = event.state / XboxController.MAX_JOY_VAL # normalize between -1 and 1
+                    self.LeftJoystickY = event.state / Controller.MAX_JOY_VAL # normalize between -1 and 1
                 elif event.code == 'ABS_X':
-                    self.LeftJoystickX = event.state / XboxController.MAX_JOY_VAL # normalize between -1 and 1
+                    self.LeftJoystickX = event.state / Controller.MAX_JOY_VAL # normalize between -1 and 1
                 elif event.code == 'ABS_RY':
-                    self.RightJoystickY = event.state / XboxController.MAX_JOY_VAL # normalize between -1 and 1
+                    self.RightJoystickY = event.state / Controller.MAX_JOY_VAL # normalize between -1 and 1
                 elif event.code == 'ABS_RX':
-                    self.RightJoystickX = event.state / XboxController.MAX_JOY_VAL # normalize between -1 and 1
+                    self.RightJoystickX = event.state / Controller.MAX_JOY_VAL # normalize between -1 and 1
                 elif event.code == 'ABS_Z':
-                    self.LeftTrigger = event.state / XboxController.MAX_TRIG_VAL # normalize between 0 and 1
+                    self.LeftTrigger = event.state / Controller.MAX_TRIG_VAL # normalize between 0 and 1
                 elif event.code == 'ABS_RZ':
-                    self.RightTrigger = event.state / XboxController.MAX_TRIG_VAL # normalize between 0 and 1
+                    self.RightTrigger = event.state / Controller.MAX_TRIG_VAL # normalize between 0 and 1
                 elif event.code == 'BTN_TL':
                     self.LeftBumper = event.state
                 elif event.code == 'BTN_TR':
