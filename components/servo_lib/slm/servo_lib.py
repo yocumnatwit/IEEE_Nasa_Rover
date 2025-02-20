@@ -54,6 +54,12 @@ class Servo_Lib:
             servo.angle = starting_angle + (i * step)
             time.sleep(step_delay)
 
+    def setPosition(self, pos_deg):
+        self.servo.angle = pos_deg
+
+    def getAngle(self):
+        return self.servo.angle
+
     def self_destruct(self):
         if self.pca is not None:
             self.pca.deinit()

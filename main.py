@@ -6,9 +6,7 @@ import time
 
 if __name__ == '__main__':
     servo = srv_lib.Servo_Lib()
-    servo.init_servo(0, 90)
-    ctrl = ctrl_lib.Controller()
-    while True:
-        k = ctrl.readSticks()
-        servo.servo.angle = k[0]
-        time.sleep(0.05)
+    controller = ctrl_lib.Controller()
+    servo.init_servo(0, 100)
+    servo.setPosition(0)
+    time.sleep(0.25)
