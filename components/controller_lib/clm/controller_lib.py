@@ -100,7 +100,7 @@ class Controller(object):
         """
         Read and normalize left values (sticks)
         """
-        sticks = self.__readSticksRaw(self)
+        sticks = self.__readSticksRaw()
         if math.fabs(sticks[0] * 100) <= 40:
             xL = 0
         elif sticks[0] > 0:
@@ -122,7 +122,7 @@ class Controller(object):
         """
         Read and normalize right values (sticks)
         """
-        sticks = self.__readSticksRaw(self)
+        sticks = self.__readSticksRaw()
         if math.fabs(sticks[2] * 100) <= 40:
             xR = 0
         elif sticks[0] > 0:
@@ -143,8 +143,8 @@ class Controller(object):
         """
         Read sticks with corrected values
         """
-        xL, yL = self.__normalizeLeft(self)
-        xR, yR = self.__normalizeRight(self)
+        xL, yL = self.__normalizeLeft()
+        xR, yR = self.__normalizeRight()
         return [xL, yL, xR, yR]
 
     def zeroSticks(self):

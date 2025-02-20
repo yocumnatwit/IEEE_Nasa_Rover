@@ -30,6 +30,7 @@ class Servo_Lib:
         self.pca = PCA9685(i2c)
         self.pca.frequency = frequency
         self.servo = servo.Servo(self.pca.channels[channel])
+        ##self.servo.angle = 0
 
 
     def rotateTo(self, pos_deg, step_delay=0.03):
@@ -37,10 +38,6 @@ class Servo_Lib:
         Rotate the servo to a specific position in degrees.
         step_delay: Time delay between each step of rotation default 0.03 seconds.
         """
-        if pos_deg > 120:
-            raise ValueError("Desired position greater than 120!")
-        elif pos_deg < 0:
-            raise ValueError("Desired position less than 0!")
 
         servo = self.servo
         starting_angle = servo.angle
@@ -53,7 +50,7 @@ class Servo_Lib:
         elif delta == 0:
             return
 
-        for i in range(abs(delta)):
+        for i in range(abs(int(delta))):
             servo.angle = starting_angle + (i * step)
             time.sleep(step_delay)
 
